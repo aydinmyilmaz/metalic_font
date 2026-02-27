@@ -1,0 +1,18 @@
+{
+  "name": "metallic_font_generation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clarendon": "node generate_clarendon_arc.js",
+    "designer-ui": "node designer_ui_server.js",
+    "warp-image": "node warp_bottom_arc_image.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^3.2.1"
+  }
+}

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Metallic Font Designer</title>
+  <link rel="stylesheet" href="/designer.css">
+</head>
+<body>
+  <main class="app">
+    <section class="panel">
+      <div class="panel-head">
+        <h1>Designer Panel</h1>
+        <p class="muted">Parametreleri kategorilere gore ayarla, render al, hedef stile yaklas.</p>
+      </div>
+
+      <form id="configForm" class="card-stack">
+        <section class="param-card card-content">
+          <h2>Content</h2>
+          <div class="group two-col">
+            <label>Text
+              <input data-key="text" type="text" value="KEREM" />
+            </label>
+            <label>Preset
+              <select data-key="preset" id="presetSelect">
+                <option value="">custom</option>
+                <option value="photoshop">photoshop</option>
+              </select>
+            </label>
+          </div>
+          <div class="group two-col">
+            <label>Main Font
+              <select data-key="fontFile" id="mainFontSelect">
+                <option value="">(auto fallback)</option>
+              </select>
+            </label>
+            <label>Output Name
+              <input data-key="out" type="text" placeholder="ui_preview" />
+            </label>
+          </div>
+          <div class="group one-col">
+            <div class="compare-fonts-head">
+              <span>Compare Fontlar</span>
+              <div class="compare-fonts-actions">
+                <button type="button" id="compareSelectAllBtn">Tumunu Sec</button>
+                <button type="button" id="compareSelectNoneBtn">Temizle</button>
+                <button type="button" id="compareRefreshBtn">Yenile</button>
+              </div>
+            </div>
+            <div id="compareFontList" class="compare-font-list"></div>
+            <div class="compare-fonts-foot">
+              <label class="compare-inline">
+                <input type="checkbox" id="compareIncludeAuto" checked>
+                auto fallback dahil et
+              </label>
+              <span id="compareSelectionInfo" class="compare-selection-info">0 secili</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="param-card card-geometry">
+          <h2>Geometry</h2>
+          <div class="group two-col">
+            <label>Curve Mode
+              <select data-key="curveMode">
+                <option value="flat">flat</option>
+                <option value="arc">arc</option>
+                <option value="arcCurve">arcCurve</option>
+                <option value="bottomWarp">bottomWarp</option>
+              </select>
+            </label>
+            <label>Warp Direction
+              <select data-key="warpDirection">
+                <option value="down">down</option>
+                <option value="up">up</option>
+              </select>
+            </label>
+          </div>
+          <div class="group three-col">
+            <label>Curve Amount
+              <input data-key="curve" type="number" min="-100" max="100" step="1" value="16" />
+            </label>
+            <label>Curve Scope
+              <select data-key="curveScope">
+                <option value="full">full</option>
+                <option value="bottomOnly">bottomOnly</option>
+              </select>
+            </label>
+            <div class="curve-actions">
+              <span>Curve Quick</span>
+              <div class="curve-btns">
+                <button type="button" id="curveDownBtn" class="icon-btn" aria-label="Curve Down" title="Curve Down">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 8 Q12 20 20 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M12 20 L9.5 16.8 M12 20 L14.5 16.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+                <button type="button" id="curveResetBtn" class="icon-btn" aria-label="Reset Curve" title="Reset Curve">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 12a6 6 0 1 0 2-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M4 6v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+                <button type="button" id="curveUpBtn" class="icon-btn" aria-label="Curve Up" title="Curve Up">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 16 Q12 4 20 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M12 4 L9.5 7.2 M12 4 L14.5 7.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="group three-col">
+            <label>Warp Start Ratio
+              <input data-key="warpStartRatio" type="number" min="0.2" max="0.9" step="0.01" value="0.62" />
+            </label>
+            <label>Warp Power
+              <input data-key="warpPower" type="number" min="0.5" max="3" step="0.05" value="1.4" />
+            </label>
+            <label>Bend
+              <input data-key="bend" type="number" min="0.05" max="0.9" step="0.01" value="0.18" />
+            </label>
+          </div>
+          <div class="group three-col">
+            <label>Rotate Factor
+              <input data-key="rotateFactor" type="number" min="0" max="1" step="0.01" value="0.28" />
+            </label>
+            <label>Apex Y Ratio
+              <input data-key="apexYRatio" type="number" min="0.05" max="0.95" step="0.01" value="0.25" />
+            </label>
+            <label>Vertical Offset
+              <input data-key="verticalOffset" type="number" min="-800" max="800" step="1" value="0" />
+            </label>
+          </div>
+          <div class="group three-col">
+            <label>Width
+              <input data-key="width" type="number" min="600" max="3200" step="1" value="1280" />
+            </label>
+            <label>Height
+              <input data-key="height" type="number" min="600" max="3200" step="1" value="1600" />
+            </label>
+            <label>Font Size
+              <input data-key="size" type="number" min="80" max="700" step="1" value="300" />
+            </label>
+          </div>
+          <div class="group two-col">
+            <label>Render Scale
+              <input data-key="renderScale" type="number" min="1" max="6" step="0.1" value="3.0" />
+            </label>
+            <label>Letter Spacing
+              <input data-key="letterSpacing" type="number" min="-0.15" max="0.2" step="0.005" value="-0.02" />
+            </label>
+          </div>
+        </section>
+
+        <section class="param-card card-light">
+          <h2>Color & Light</h2>
+          <div class="group three-col">
+            <label>Top Color
+              <input data-key="topColor" type="color" value="#b66eb8" />
+            </label>
+            <label>Mid Color
+              <input data-key="midColor" type="color" value="#ffffff" />
+            </label>
+            <label>Bottom Color
+              <input data-key="bottomColor" type="color" value="#4a0f59" />
+            </label>
+          </div>
+          <div class="group two-col">
+            <label>Outline Color
+              <input data-key="outlineColor" type="color" value="#f2ebff" />
+            </label>
+            <label>Glow Color
+              <input data-key="glowColor" type="color" value="#ffffff" />
+            </label>
+          </div>
+          <div class="group three-col">
+            <label>Gradient Opacity
+              <input data-key="gradientOpacity" type="number" min="0" max="1" step="0.01" value="0.92" />
+            </label>
+            <label>Bevel Hi Opacity
+              <input data-key="bevelHighlightOpacity" type="number" min="0" max="1" step="0.01" value="0.90" />
+            </label>
+            <label>Bevel Shadow Opacity
+              <input data-key="bevelShadowOpacity" type="number" min="0" max="1" step="0.01" value="0.62" />
+            </label>
+          </div>
+          <div class="group three-col">
+            <label>Top Shadow Opacity
+              <input data-key="topShadowOpacity" type="number" min="0" max="1" step="0.01" value="0.18" />
+            </label>
+            <label>Glow Opacity
+              <input data-key="glowOpacity" type="number" min="0" max="1" step="0.01" value="0.60" />
+            </label>
+            <label>Glow Size
+              <input data-key="glowSize" type="number" min="0" max="300" step="1" value="24" />
+            </label>
+          </div>
+          <div class="group one-col">
+            <label>Stroke Size
+              <input data-key="strokeSize" type="number" min="1" max="80" step="1" value="10" />
+            </label>
+          </div>
+        </section>
+
+        <section class="param-card card-depth">
+          <h2>Depth & Emboss</h2>
+          <div class="group three-col">
+            <label>Bevel Size
+              <input data-key="bevelSize" type="number" min="0" max="120" step="1" value="20" />
+            </label>
+            <label>Extrude Depth
+              <input data-key="extrudeDepth" type="number" min="0" max="60" step="1" value="12" />
+            </label>
+            <label>Extrude Opacity
+              <input data-key="extrudeOpacity" type="number" min="0" max="1" step="0.01" value="0.32" />
+            </label>
+          </div>
+          <div class="group one-col">
+            <label>Edge 3D Strength
+              <input data-key="edge3dStrength" type="number" min="0" max="1.5" step="0.01" value="1.0" />
+            </label>
+          </div>
+        </section>
+
+        <div class="actions">
+          <button type="button" id="renderBtn">Render</button>
+          <button type="button" id="compareBtn">Font Karsilastir</button>
+          <button type="button" id="presetBtn">Preset Yukle</button>
+          <button type="button" id="resetBtn">Defaulta Don</button>
+          <label class="auto">
+            <input type="checkbox" id="autoRender" checked>
+            Auto render
+          </label>
+        </div>
+      </form>
+
+      <p id="status" class="status">Hazir</p>
+      <pre id="command" class="command"></pre>
+    </section>
+
+    <section class="preview">
+      <aside id="renderStamp" class="render-stamp" aria-live="polite"></aside>
+      <img id="previewImage" alt="render output preview" />
+      <section id="compareResults" class="compare-results" aria-live="polite"></section>
+    </section>
+  </main>
+  <script src="/designer.js"></script>
+</body>
+</html>

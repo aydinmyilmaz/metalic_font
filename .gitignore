@@ -1,0 +1,59 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+dist/
+build/
+coverage/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.svelte-kit/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+
+# Environment / local secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Generated outputs
+output/
+outputs/
+
+# Large/local assets (use Git LFS if you need versioning)
+data/
+*.psd
+
+# Fonts: keep curated font files, skip ad-hoc downloads/archives
+fonts/user_downloads/
+fonts/*.zip
+
+# Dynamic Mockups test runtime artifacts
+dynamicmockups_api_test/*_url.txt
+dynamicmockups_api_test/last_run*.json
+dynamicmockups_api_test/*upload_response.json
+
+# Misc
+*.log
+*.tmp
