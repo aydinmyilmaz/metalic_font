@@ -38,7 +38,8 @@ __pycache__/
 *.local
 
 # Generated outputs
-output/
+output/*
+!output/original_image.png
 outputs/
 
 # Large/local assets (use Git LFS if you need versioning)
